@@ -1,0 +1,14 @@
+.comment-section {
+    padding: 16px;
+    border-left: 2px solid #eee;
+}
+
+.comment-section button {
+    margin: 0;
+}
+
+.comment-section .comment-wrapper {
+    background-color: #eee;
+    padding: 8px;
+    margin: 8px 0;
+}
