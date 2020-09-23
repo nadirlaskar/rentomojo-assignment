@@ -10,13 +10,24 @@ const PostDetails = () => {
     const [postInfo, setPostDetails] = useState(false);
     const history = useHistory();
     useEffect(() => {
-        fetchPostById(postId).then(setPostDetails);
+        fetchPostById(postId)
+            .then(setPostDetails)
+            .catch(err => {
+                console.err(err);
+                alert("Unable to fetch post");
+            });
     }, [postId])
     const deletePost = useCallback(() => {
         setDeletingFlag(true);
-        deletePostById(postId).then(() => {
-            history.push(`/posts/${postInfo.userId}`)
-        });
+        deletePostById(postId)
+            .then(() => {
+                history.push(`/posts/${postInfo.userId}`)
+            })
+            .catch(err => {
+                console.err(err);
+                alert("Unable to delete post");
+                setDeletingFlag(false);
+            });
     }, [postId, history, postInfo])
     return postInfo ? <>
         <UserProfile userId={postInfo.userId} />

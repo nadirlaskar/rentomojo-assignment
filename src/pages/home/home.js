@@ -23,7 +23,10 @@ const transformUserResponse = (users) => {
 const Home = () => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        fetchUsers().then(transformUserResponse).then(setUsers)
+        fetchUsers().then(transformUserResponse).then(setUsers).catch(err=>{
+            console.err(err);
+            alert("Unable to fetch users");
+        })
     }, [])
     const userRows = useMemo(() => generateTable(users), [users]);
     return <>

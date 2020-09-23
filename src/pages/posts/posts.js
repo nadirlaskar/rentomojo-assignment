@@ -44,7 +44,12 @@ const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [pagination, setPagination] = useState(INITIAL_PAGINATION)
     useEffect(() => {
-        fetchPosts(userId, pagination.start, pagination.count).then(transformPosts).then(setPosts);
+        fetchPosts(userId, pagination.start, pagination.count)
+            .then(transformPosts)
+            .then(setPosts).catch(err => {
+                console.err(err);
+                alert("Unable to fetch posts");
+            });
     }, [pagination, userId])
     const postItems = useMemo(() => generatePaginatedPosts(posts, pagination), [pagination, posts])
     return <>

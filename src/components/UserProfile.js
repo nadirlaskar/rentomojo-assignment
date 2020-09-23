@@ -5,7 +5,12 @@ const UserProfile = ({ userId }) => {
     const [userInfo, setUserInfo] = useState(false);
     const history = useHistory();
     useEffect(() => {
-        fetchUserInfo(userId).then(setUserInfo);
+        fetchUserInfo(userId)
+        .then(setUserInfo)
+        .catch(err=>{
+            console.err(err);
+            alert("Unable to fetch user profile");
+        });
     }, [userId])
     return userInfo ? <>
         <h4 onClick={history.goBack}>Go Back</h4>

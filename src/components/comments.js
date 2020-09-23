@@ -14,7 +14,12 @@ const getCommentList = (comments) => {
 const Comments = ({ postId }) => {
     const [comments, setComments] = useState(false);
     const loadComments = useCallback(() => {
-        fetchPostCommentsByPostId(postId).then(setComments)
+        fetchPostCommentsByPostId(postId)
+            .then(setComments)
+            .catch(err => {
+                console.err(err);
+                alert("Unable to fetch comments");
+            })
     }, [postId])
     const commentList = useMemo(() => getCommentList(comments), [comments])
     return <section class="comment-section">
