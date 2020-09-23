@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import UserProfile from "../../components/UserProfile";
-import {fetchPosts} from "../../apis";
+import { fetchPosts } from "../../apis";
+import "./posts.css";
 const INITIAL_PAGINATION = {
     start: 0,
     count: 4
 }
 const generatePaginatedPosts = (posts, { start, count }) => {
     return posts.slice(start, start + count).map((post, index) => (<li key={index}>
-        <h3>#{post.id} {post.title}</h3>
+        <h3 class="post-title">#{post.id} {post.title}</h3>
         {post.details}
     </li>))
 }
@@ -20,13 +21,16 @@ const transformPosts = (posts) => {
     }))
 }
 const Pagination = ({ start, end, total, onNext, onPrev }) => {
-    return <div>
-        <span>
-            Showing
-            <button disabled={start === 0} onClick={onPrev}>Prev</button>
-            {start + 1} to {end}
-            <button disabled={(end - start) < total} onClick={onNext}>Next</button></span>
-    </div>
+    return (
+        <div>
+            <span>
+                Showing
+                <button disabled={start === 0} onClick={onPrev}>Prev</button>
+                {start + 1} to {end}
+                <button disabled={(end - start) < total} onClick={onNext}>Next</button>
+            </span>
+        </div>
+    )
 }
 
 const updatePagination = (oldPagination, step) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {fetchUsers} from "../../apis";
+import "./home.css";
 
 const TABLE_HEADERS = ["Name", "Company", "Blog posts"];
 const generateTable = (items) => {
@@ -14,7 +15,7 @@ const transformUserResponse = (users) => {
     let transformedResponse = users.map(user => ({
         name: user.name,
         company: user.company.name,
-        blog: <Link to={`/posts/${user.id}`}>Post</Link>
+        blog: <Link to={`/posts/${user.id}`}>View Posts</Link>
     }))
     return transformedResponse;
 }
@@ -25,14 +26,17 @@ const Home = () => {
         fetchUsers().then(transformUserResponse).then(setUsers)
     }, [])
     const userRows = useMemo(() => generateTable(users), [users]);
-    return (<table>
-        <thead>
-            <tr>
-                {TABLE_HEADERS.map((header,index) => <td key={index}>{header}</td>)}
-            </tr>
-        </thead>
-        <tbody>{userRows}</tbody>
-    </table>)
+    return <>
+        <h2>Users Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    {TABLE_HEADERS.map((header,index) => <td key={index}>{header}</td>)}
+                </tr>
+            </thead>
+            <tbody>{userRows}</tbody>
+        </table>
+    </>
 }
 
 export default Home;

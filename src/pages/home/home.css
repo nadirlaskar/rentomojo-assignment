@@ -1,0 +1,17 @@
+table tr td {
+    padding: 8px;
+    margin: 4px;
+}
+
+table thead td {
+    font-weight: bold;
+    background: #ddd;
+}
+
+table thead {
+    padding-bottom: 20px;
+}
+
+table tbody tr {
+    background-color: #eee;
+}
